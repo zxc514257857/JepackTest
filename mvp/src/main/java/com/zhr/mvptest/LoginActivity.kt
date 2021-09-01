@@ -10,13 +10,17 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : AppCompatActivity(), LoginPresenter.LoginCallback {
 
-    private val loginPresenter by lazy{
+    private val loginPresenter by lazy {
         LoginPresenter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        initListener()
+    }
+
+    private fun initListener() {
         btnLogin.setOnClickListener {
             toLogin()
         }

@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
- * mvc架构：实现功能，登录及登陆状态提示
+ * https://www.bilibili.com/video/BV1Dk4y1C7mm?p=1
+ * mvc架构：实现功能: 登录及登陆状态提示
  *
  * kotlin几个语法糖：
  * by lazy
@@ -28,6 +29,10 @@ class LoginActivity : AppCompatActivity(), LoginModel.DoLoginCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        initListener()
+    }
+
+    private fun initListener() {
         btnLogin.setOnClickListener {
             toLogin()
         }
