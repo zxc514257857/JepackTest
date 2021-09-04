@@ -1,20 +1,13 @@
-package com.zhr.mvp1
+package com.zhr.mvp2
 
-import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_player.*
 import kotlin.random.Random
 
-/**
- * 实现功能: 点击上一首、下一首、播放、暂停 处理对应的逻辑
- * 之前通过界面去写代码的方式叫做UI驱动开发。通过测试用例以及测试结果驱动的方式叫测试驱动开发
- * 后面我们还会使用到数据驱动开发
- */
 class PlayerActivity : AppCompatActivity(), IPlayerCallback {
 
     private var songsList: MutableList<SongsBean>? = null
-    private val TAG: String = "PlayerActivity"
 
     private val playerPresenter by lazy {
         PlayerPresenter.getInstance
@@ -25,15 +18,12 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
         setContentView(R.layout.activity_player)
         initData()
         initListener()
+        initDataListener()
     }
 
     private fun initData() {
         playerPresenter.setPlayerCallback(this)
         playerPresenter.getSongs()
-    }
-
-    override fun getSongs(songsList: MutableList<SongsBean>?) {
-        this.songsList = songsList
     }
 
     private fun initListener() {
@@ -48,18 +38,26 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
         }
     }
 
-    override fun toContinuePlay() {
+    private fun initDataListener() {
+
+    }
+
+    override fun getSongs(songsList: MutableList<SongsBean>) {
+        this.songsList = songsList
+    }
+
+    override fun playRandomSong() {
+        btnPlayOrPause.text = "||"
+        val songsBean = songsList?.get(Random.nextInt(songsList!!.size))
+        tvSongTitle.text = songsBean?.title
+        ivSongCover.setImageResource(songsBean?.pics!!)
+    }
+
+    override fun playContinueSong() {
         btnPlayOrPause.text = "||"
     }
 
-    override fun toRandomPlay() {
-        btnPlayOrPause.text = "||"
-        val songsBean = songsList!![Random.nextInt(songsList!!.size)]
-        ivSongCover.setImageResource(songsBean.pics!!)
-        tvSongTitle.text = songsBean.title
-    }
-
-    override fun toPause() {
+    override fun pauseSong() {
         btnPlayOrPause.text = "▷"
     }
 }

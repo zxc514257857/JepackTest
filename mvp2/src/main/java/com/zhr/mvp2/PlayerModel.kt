@@ -1,10 +1,10 @@
-package com.zhr.mvp1
+package com.zhr.mvp2
 
-// 如果有需要网络请求的情况写到这个model里面
+import kotlin.random.Random
+
 class PlayerModel {
 
     fun requestSongs(): MutableList<SongsBean> {
-
         val songsList: MutableList<SongsBean> = mutableListOf()
         val songsBean1 = SongsBean()
         songsBean1.title = "STAY"
@@ -57,5 +57,10 @@ class PlayerModel {
         songsList.add(songsBean10)
 
         return songsList
+    }
+
+    fun getSongById(): SongsBean {
+        val songs = requestSongs()
+        return songs[Random.nextInt(songs.size)]
     }
 }

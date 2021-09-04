@@ -10,13 +10,13 @@ import kotlinx.android.synthetic.main.activity_login.*
  * mvc架构：实现功能: 登录及登陆状态提示
  *
  * kotlin几个语法糖：
- * by lazy
+ * by lazy  懒加载
  * object:  设置监听回调常用
  * companion object  方便类.调用
- * JVMStatic
- * in 遍历
- * is 包含
- * Class::class.java
+ * JVMStatic   方便类.调用
+ * in  遍历
+ * is  包含
+ * Class::class.java    xxx.class
  * .let{}   合并同一变量
  * 构造方法这里的，变量名：数据类型（数据类型指的不是var和val而是String等的数据类型）
  */

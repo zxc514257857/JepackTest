@@ -1,9 +1,11 @@
 package com.zhr.mvp1
 
+import android.util.Log
+
 // 私有构造方法，无法通过构造方法创建对象
 class PlayerPresenter private constructor() {
 
-    private var playerCallback: PlayerCallback? = null
+    private var playerCallback: IPlayerCallback? = null
     private var currentPlayState = PlayState.NONE
 
     // PlayerPresenter 单例模式
@@ -25,13 +27,7 @@ class PlayerPresenter private constructor() {
         PLAYING, PAUSE, LOADING, NONE
     }
 
-    interface PlayerCallback {
-        fun toContinuePlay()
-        fun toRandomPlay()
-        fun toPause()
-    }
-
-    fun setPlayerCallback(playerCallback: PlayerCallback) {
+    fun setPlayerCallback(playerCallback: IPlayerCallback) {
         this.playerCallback = playerCallback
     }
 
@@ -64,5 +60,10 @@ class PlayerPresenter private constructor() {
     fun playNext() {
         playerCallback?.toRandomPlay()
         currentPlayState = PlayState.PLAYING
+    }
+
+    fun getSongs(){
+        val songsList = playerModel.requestSongs()
+        playerCallback?.getSongs(songsList)
     }
 }

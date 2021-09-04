@@ -1,3 +1,4 @@
 include ':mvc'
 include ':mvp'
 include ':mvp1'
+include ':mvp2'
