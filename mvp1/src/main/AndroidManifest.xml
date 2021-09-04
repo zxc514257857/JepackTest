@@ -11,6 +11,7 @@
         android:theme="@style/Theme.JetpackTest"
         tools:ignore="AllowBackup">
         <activity android:name=".PlayerActivity">
+<!--        <activity android:name=".FloatPlayerActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

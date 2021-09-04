@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 class PlayerModel {
 
-    fun requestSongs(): MutableList<SongsBean> {
+    private fun requestSongs(): MutableList<SongsBean> {
         val songsList: MutableList<SongsBean> = mutableListOf()
         val songsBean1 = SongsBean()
         songsBean1.title = "STAY"

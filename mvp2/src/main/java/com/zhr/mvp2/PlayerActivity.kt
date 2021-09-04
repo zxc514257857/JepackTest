@@ -1,13 +1,13 @@
 package com.zhr.mvp2
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_player.*
-import kotlin.random.Random
 
-class PlayerActivity : AppCompatActivity(), IPlayerCallback {
+class PlayerActivity : AppCompatActivity() {
 
-    private var songsList: MutableList<SongsBean>? = null
+    private val TAG: String = "PlayerActivity"
 
     private val playerPresenter by lazy {
         PlayerPresenter.getInstance
@@ -16,14 +16,8 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-        initData()
         initListener()
         initDataListener()
-    }
-
-    private fun initData() {
-        playerPresenter.setPlayerCallback(this)
-        playerPresenter.getSongs()
     }
 
     private fun initListener() {
@@ -38,26 +32,29 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
         }
     }
 
+    /**
+     * 对数据进行监听
+     */
     private fun initDataListener() {
-
-    }
-
-    override fun getSongs(songsList: MutableList<SongsBean>) {
-        this.songsList = songsList
-    }
-
-    override fun playRandomSong() {
-        btnPlayOrPause.text = "||"
-        val songsBean = songsList?.get(Random.nextInt(songsList!!.size))
-        tvSongTitle.text = songsBean?.title
-        ivSongCover.setImageResource(songsBean?.pics!!)
-    }
-
-    override fun playContinueSong() {
-        btnPlayOrPause.text = "||"
-    }
-
-    override fun pauseSong() {
-        btnPlayOrPause.text = "▷"
+        playerPresenter.currentSong.addListener {
+            Log.i(TAG, "当前歌曲回调：$it")
+            // 数据变化，监听。更新UI
+            tvSongTitle.text = it?.title
+            ivSongCover.setImageResource(it?.pics!!)
+        }
+        playerPresenter.currentPlayState.addListener {
+            Log.i(TAG, "当前歌曲状态回调: $it")
+            when (it) {
+                PlayerPresenter.PlayState.NONE -> {
+                    btnPlayOrPause.text = "▷"
+                }
+                PlayerPresenter.PlayState.PLAYING -> {
+                    btnPlayOrPause.text = "||"
+                }
+                PlayerPresenter.PlayState.PAUSE -> {
+                    btnPlayOrPause.text = "▷"
+                }
+            }
+        }
     }
 }

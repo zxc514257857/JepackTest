@@ -2,15 +2,21 @@ package com.zhr.mvp2
 
 class PlayerPresenter private constructor() {
 
-    private var playerCallback: IPlayerCallback? = null
-    private var currentPlayState: PlayState? = PlayState.NONE
-    private var currentSong: SongsBean? = null
+    // 对这两个数据让 DataListenController进行了一个包裹， 对这两个数据进行监听
+    var currentPlayState = DataListenController<PlayState>()
+    var currentSong = DataListenController<SongsBean>()
+    private val TAG: String = "PlayerPresenter"
 
     companion object {
         @JvmStatic
         val getInstance by lazy {
             PlayerPresenter()
         }
+    }
+
+    // 播放器当前三种状态：播放中，暂停中以及无内容中
+    enum class PlayState {
+        PLAYING, PAUSE, NONE
     }
 
     private val playerModel by lazy {
@@ -21,55 +27,44 @@ class PlayerPresenter private constructor() {
         Player()
     }
 
-    // 播放器当前三种状态：播放中，暂停中以及无内容中
-    enum class PlayState {
-        PLAYING, PAUSE, NONE
-    }
-
-    fun setPlayerCallback(playerCallback: IPlayerCallback) {
-        this.playerCallback = playerCallback
-    }
-
     fun playOrPause() {
-        if(currentSong == null){
-            currentSong = playerModel.getSongById()
-        }
-        player.play(currentSong)
-
-
-
-
-        when (currentPlayState) {
+        when (currentPlayState.value) {
             // 当前为无内容状态 -> 那就随机播放歌曲
             PlayState.NONE -> {
-                playerCallback?.playRandomSong()
-                currentPlayState = PlayState.PLAYING
+                playSongs()
+                currentPlayState.value = PlayState.PLAYING
             }
             // 当前为播放中状态 -> 那就暂停播放
             PlayState.PLAYING -> {
-                playerCallback?.pauseSong()
-                currentPlayState = PlayState.PAUSE
+                // 在播放暂停这里不去改变当前歌曲数据 只改变播放状态数据
+                player.pause(currentSong.value)
+                currentPlayState.value = PlayState.PAUSE
             }
             // 当前为暂停中状态 -> 那就开始播放本首歌曲
             PlayState.PAUSE -> {
-                playerCallback?.playContinueSong()
-                currentPlayState = PlayState.PLAYING
+                // 在播放暂停这里不去改变当前歌曲数据 只改变播放状态数据
+                player.play(currentSong.value)
+                currentPlayState.value = PlayState.PLAYING
+            }
+            else -> {
+                playSongs()
+                currentPlayState.value = PlayState.PLAYING
             }
         }
     }
 
+    private fun playSongs() {
+        currentSong.value = playerModel.getSongById()
+        player.play(currentSong.value)
+    }
+
     fun playPrevious() {
-        playerCallback?.playRandomSong()
-        currentPlayState = PlayState.PLAYING
+        playSongs()
+        currentPlayState.value = PlayState.PLAYING
     }
 
     fun playNext() {
-        playerCallback?.playRandomSong()
-        currentPlayState = PlayState.PLAYING
-    }
-
-    fun getSongs() {
-        val songsList = playerModel.requestSongs()
-        playerCallback?.getSongs(songsList)
+        playSongs()
+        currentPlayState.value = PlayState.PLAYING
     }
 }

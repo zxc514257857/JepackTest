@@ -1,7 +1,6 @@
 package com.zhr.mvp1
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_player.*
 import kotlin.random.Random
@@ -13,11 +12,16 @@ import kotlin.random.Random
  */
 class PlayerActivity : AppCompatActivity(), IPlayerCallback {
 
-    private var songsList: MutableList<SongsBean>? = null
     private val TAG: String = "PlayerActivity"
+    private var songsList: MutableList<SongsBean>? = null
+    private var songsBean: SongsBean? = null
 
     private val playerPresenter by lazy {
         PlayerPresenter.getInstance
+    }
+
+    private val player by lazy {
+        Player()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,16 +54,19 @@ class PlayerActivity : AppCompatActivity(), IPlayerCallback {
 
     override fun toContinuePlay() {
         btnPlayOrPause.text = "||"
+        player.play(songsBean)
     }
 
     override fun toRandomPlay() {
         btnPlayOrPause.text = "||"
-        val songsBean = songsList!![Random.nextInt(songsList!!.size)]
-        ivSongCover.setImageResource(songsBean.pics!!)
-        tvSongTitle.text = songsBean.title
+        songsBean = songsList!![Random.nextInt(songsList!!.size)]
+        ivSongCover.setImageResource(songsBean?.pics!!)
+        tvSongTitle.text = songsBean?.title
+        player.play(songsBean)
     }
 
     override fun toPause() {
         btnPlayOrPause.text = "▷"
+        player.pause(songsBean)
     }
 }
