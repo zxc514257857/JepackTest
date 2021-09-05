@@ -1,5 +1,6 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.player
 
+import com.zhr.mvp2.R
 import kotlin.random.Random
 
 class PlayerModel {

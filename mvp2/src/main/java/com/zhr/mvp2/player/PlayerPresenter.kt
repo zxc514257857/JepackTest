@@ -1,6 +1,9 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.player
 
-class PlayerPresenter private constructor() {
+import android.util.Log
+import com.zhr.mvp2.lifecycle.ILifeCycle
+
+class PlayerPresenter private constructor() : ILifeCycle {
 
     // 对这两个数据让 DataListenController进行了一个包裹， 对这两个数据进行监听
     var currentPlayState = DataListenController<PlayState>()
@@ -67,4 +70,20 @@ class PlayerPresenter private constructor() {
         playSongs()
         currentPlayState.value = PlayState.PLAYING
     }
+
+    override fun onCreate() {}
+
+    override fun onStart() {
+        Log.i(TAG, "网络监听打开")
+    }
+
+    override fun onResume() {}
+
+    override fun onPause() {}
+
+    override fun onStop() {
+        Log.i(TAG, "网络监听关闭")
+    }
+
+    override fun onDestroy() {}
 }

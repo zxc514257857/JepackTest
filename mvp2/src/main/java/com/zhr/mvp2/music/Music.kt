@@ -1,11 +1,11 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.music
 
-class SongsBean {
+class Music {
 
     var title: String? = null
     var pics: Int? = null
 
     override fun toString(): String {
-        return "SongsBean(title=$title, pics=$pics)"
+        return "Music(title=$title, pics=$pics)"
     }
 }

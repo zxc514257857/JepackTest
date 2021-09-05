@@ -1,11 +1,17 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.player
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.zhr.mvp2.R
+import com.zhr.mvp2.base.BaseActivity
+import com.zhr.mvp2.music.MusicPresenter
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity : AppCompatActivity() {
+/**
+ * 实现功能: 点击上一首、下一首、播放、暂停 处理对应的逻辑
+ */
+class PlayerActivity : BaseActivity() {
 
     private val TAG: String = "PlayerActivity"
 
@@ -13,12 +19,48 @@ class PlayerActivity : AppCompatActivity() {
         PlayerPresenter.getInstance
     }
 
+    private val musicPresenter by lazy {
+        MusicPresenter()
+    }
+
+    init {
+        // 把这两个实现了生命周期接口的方法加入监听
+        addListener(playerPresenter)
+        addListener(musicPresenter)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         initListener()
         initDataListener()
+//        musicPresenter.onStart()
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        musicPresenter.onStart()
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        musicPresenter.onResume()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        musicPresenter.onPause()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        musicPresenter.onStop()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        musicPresenter.onDestroy()
+//    }
 
     private fun initListener() {
         btnPlayOrPause.setOnClickListener {

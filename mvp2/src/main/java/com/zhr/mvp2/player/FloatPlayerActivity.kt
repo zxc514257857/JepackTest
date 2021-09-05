@@ -1,7 +1,8 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.player
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.zhr.mvp2.R
 import kotlinx.android.synthetic.main.activity_player.*
 
 /**
@@ -33,6 +34,7 @@ class FloatPlayerActivity : AppCompatActivity() {
     }
 
     private fun initDataListener() {
+        // 数据驱动开发 监听数据变化 有变化就执行xxx
         playerPresenter.currentPlayState.addListener {
             when(it){
                 PlayerPresenter.PlayState.NONE -> btnPlayOrPause.text = "▷"

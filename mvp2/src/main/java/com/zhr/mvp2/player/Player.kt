@@ -1,4 +1,4 @@
-package com.zhr.mvp2
+package com.zhr.mvp2.player
 
 import android.util.Log
 

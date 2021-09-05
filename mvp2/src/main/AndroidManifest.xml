@@ -4,6 +4,7 @@
     package="com.zhr.mvp2">
 
     <application
+        android:name=".music.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackTest"
         tools:ignore="AllowBackup">
-        <activity android:name=".FloatPlayerActivity">
-<!--        <activity android:name=".PlayerActivity">-->
+<!--        <activity android:name=".music.MusicActivity">-->
+<!--        <activity android:name=".player.FloatPlayerActivity">-->
+        <activity android:name=".player.PlayerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
