@@ -9,6 +9,7 @@ class DataListenController<T> {
     var value: T? = null
         // 当数据变化的时候，就通知更新
         set(value: T?) {
+            // 确保数据更新是通过主线程进行分发
             // 如果当前线程为主线程
             if(Looper.getMainLooper().thread == Thread.currentThread()){
                 blocks.forEach {

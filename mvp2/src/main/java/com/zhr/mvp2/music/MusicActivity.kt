@@ -32,7 +32,7 @@ class MusicActivity : BaseActivity() {
 
     init {
         // 把此实现了生命周期接口的方法 加入监听
-        addListener(musicPresenter)
+        addLifeListener(musicPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

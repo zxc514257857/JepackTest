@@ -19,7 +19,7 @@ class MusicPresenter : ILifeCycle {
 
     fun getMusic() {
         // 从model层获取音乐列表
-        musicModel.getMusicByPage(page, size, object : MusicModel.requestMusicCallback {
+        musicModel.getMusicByPage(page, size, object : MusicModel.RequestMusicCallback {
             override fun onSuccess(musicList: List<Music>?) {
                 // 将数据赋值给正在监听的数据
                 this@MusicPresenter.musicList.value = musicList

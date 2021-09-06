@@ -2,7 +2,6 @@ package com.zhr.mvp2.player
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.zhr.mvp2.R
 import com.zhr.mvp2.base.BaseActivity
 import com.zhr.mvp2.music.MusicPresenter
@@ -25,8 +24,8 @@ class PlayerActivity : BaseActivity() {
 
     init {
         // 把这两个实现了生命周期接口的方法加入监听
-        addListener(playerPresenter)
-        addListener(musicPresenter)
+        addLifeListener(playerPresenter)
+        addLifeListener(musicPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

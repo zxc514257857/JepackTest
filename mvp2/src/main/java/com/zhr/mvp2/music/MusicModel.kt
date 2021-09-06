@@ -4,7 +4,7 @@ import com.zhr.mvp2.R
 
 class MusicModel {
 
-    fun getMusicByPage(page: Int, size: Int, callback: requestMusicCallback) {
+    fun getMusicByPage(page: Int, size: Int, callback: RequestMusicCallback) {
         // 在子线程进行网络请求等耗时性操作
         Thread{
             val musicList = mutableListOf<Music>()
@@ -18,7 +18,7 @@ class MusicModel {
         }.start()
     }
 
-    interface requestMusicCallback {
+    interface RequestMusicCallback {
         fun onSuccess(musicList: List<Music>?)
         fun onFail(msg: String, code: Int)
     }
