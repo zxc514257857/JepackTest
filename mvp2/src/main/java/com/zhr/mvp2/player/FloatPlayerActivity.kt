@@ -1,14 +1,14 @@
 package com.zhr.mvp2.player
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.zhr.mvp2.R
+import com.zhr.mvp2.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_player.*
 
 /**
  * 实现功能：模拟点击FloatingActionButton按钮实现播放和暂停功能
  */
-class FloatPlayerActivity : AppCompatActivity() {
+class FloatPlayerActivity : BaseActivity() {
 
     private val TAG: String = "FloatPlayerActivity"
 
@@ -18,6 +18,10 @@ class FloatPlayerActivity : AppCompatActivity() {
 
     private val player by lazy {
         Player()
+    }
+
+    init {
+        lifeCycleProvider.addLifeListener(playerPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +40,7 @@ class FloatPlayerActivity : AppCompatActivity() {
     private fun initDataListener() {
         // 数据驱动开发 监听数据变化 有变化就执行xxx
         playerPresenter.currentPlayState.addListener {
-            when(it){
+            when (it) {
                 PlayerPresenter.PlayState.NONE -> btnPlayOrPause.text = "▷"
                 PlayerPresenter.PlayState.PLAYING -> btnPlayOrPause.text = "||"
                 PlayerPresenter.PlayState.PAUSE -> btnPlayOrPause.text = "▷"

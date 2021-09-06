@@ -18,13 +18,41 @@ class LifeCycleProvider {
         lifeCycleListener.remove(lifeCycle)
     }
 
-    // 需要通知 lifeCycle的变化
-
-
     fun makeLifeState(state: LifeState?) {
         currentLifeState = state
         when (state) {
-
+            LifeState.CREATE -> {
+                lifeCycleListener.forEach {
+                    it.onCreate()
+                }
+            }
+            LifeState.START -> {
+                lifeCycleListener.forEach {
+                    it.onStart()
+                }
+            }
+            LifeState.RESUME -> {
+                lifeCycleListener.forEach {
+                    it.onResume()
+                }
+            }
+            LifeState.PAUSE -> {
+                lifeCycleListener.forEach {
+                    it.onPause()
+                }
+            }
+            LifeState.STOP -> {
+                lifeCycleListener.forEach {
+                    it.onStop()
+                }
+            }
+            LifeState.DESTROY -> {
+                lifeCycleListener.forEach {
+                    it.onDestroy()
+                }
+                // 在onDestroy中清空此Activity中的所有生命周期数据
+                lifeCycleListener.clear()
+            }
         }
     }
 }

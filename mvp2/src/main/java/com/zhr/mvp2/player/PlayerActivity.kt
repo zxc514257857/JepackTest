@@ -24,8 +24,10 @@ class PlayerActivity : BaseActivity() {
 
     init {
         // 把这两个实现了生命周期接口的方法加入监听
-        addLifeListener(playerPresenter)
-        addLifeListener(musicPresenter)
+//        addLifeListener(playerPresenter)
+//        addLifeListener(musicPresenter)
+        lifeCycleProvider.addLifeListener(playerPresenter)
+        lifeCycleProvider.addLifeListener(musicPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

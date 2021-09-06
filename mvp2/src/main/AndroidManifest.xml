@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackTest"
         tools:ignore="AllowBackup">
-<!--        <activity android:name=".music.MusicActivity">-->
+        <activity android:name=".music.MusicActivity">
 <!--        <activity android:name=".player.FloatPlayerActivity">-->
-        <activity android:name=".player.PlayerActivity">
+<!--        <activity android:name=".player.PlayerActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
