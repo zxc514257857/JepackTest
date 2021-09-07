@@ -19,16 +19,16 @@ class PlayerActivity : BaseActivity() {
     }
 
     private val musicPresenter by lazy {
-        MusicPresenter()
+        MusicPresenter(this)
     }
 
-    init {
-        // 把这两个实现了生命周期接口的方法加入监听
-//        addLifeListener(playerPresenter)
-//        addLifeListener(musicPresenter)
-        lifeCycleProvider.addLifeListener(playerPresenter)
-        lifeCycleProvider.addLifeListener(musicPresenter)
-    }
+//    init {
+//        // 把这两个实现了生命周期接口的方法加入监听
+////        addLifeListener(playerPresenter)
+////        addLifeListener(musicPresenter)
+//        lifecycleProvider.addLifeListener(playerPresenter)
+//        lifecycleProvider.addLifeListener(musicPresenter)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

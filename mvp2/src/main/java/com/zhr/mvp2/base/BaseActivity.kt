@@ -2,42 +2,43 @@ package com.zhr.mvp2.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.zhr.mvp2.lifecycle.LifeCycleProvider
+import com.zhr.mvp2.lifecycle.ILifecycleOwner
 import com.zhr.mvp2.lifecycle.LifeState
+import com.zhr.mvp2.lifecycle.LifecycleProvider
 
 /**
  * 实现功能：通过BaseActivity将生命周期方法实现抽取出来
  * 让其他Activity也可以通知Presenter生命周期状态变化
  */
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), ILifecycleOwner {
 
-    /********************把这部分抽取出来到LifeCycleProvider，Activity、Fragment等谁用谁来取*******************/
+    /********************把这部分抽取出来到LifecycleProvider，Activity、Fragment等谁用谁来取*******************/
     // 为什么要创建一个生命周期的集合呢？ 因为一个Activity中要添加的生命周期数量可能不止一个！
-//    private val lifeCycleListener = mutableListOf<ILifeCycle>()
+//    private val lifecycleListener = mutableListOf<ILifecycle>()
 //
-//    fun addLifeListener(lifeCycle: ILifeCycle) {
-//        if (!lifeCycleListener.contains(lifeCycle)) {
-//            lifeCycleListener.add(lifeCycle)
+//    fun addLifeListener(lifecycle: ILifecycle) {
+//        if (!lifecycleListener.contains(lifecycle)) {
+//            lifecycleListener.add(lifecycle)
 //        }
 //    }
 //
-//    private fun removeListener(lifeCycle: ILifeCycle) {
-//        lifeCycleListener.remove(lifeCycle)
+//    private fun removeListener(lifecycle: ILifecycle) {
+//        lifecycleListener.remove(lifecycle)
 //    }
 
     /********************把这部分抽取出来，Activity、Fragment等谁用谁来取*******************/
 
-    val lifeCycleProvider by lazy {
-        LifeCycleProvider()
+    val lifeProvider by lazy {
+        LifecycleProvider()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 如果在onCreate方法中，就把这个生命周期中注册的所有内容都调用起来
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onCreate()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.CREATE)
+        lifeProvider.makeLifeState(LifeState.CREATE)
     }
 
     /**
@@ -45,41 +46,45 @@ open class BaseActivity : AppCompatActivity() {
      */
     override fun onStart() {
         super.onStart()
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onStart()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.START)
+        lifeProvider.makeLifeState(LifeState.START)
     }
 
     override fun onResume() {
         super.onResume()
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onResume()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.RESUME)
+        lifeProvider.makeLifeState(LifeState.RESUME)
     }
 
     override fun onPause() {
         super.onPause()
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onPause()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.PAUSE)
+        lifeProvider.makeLifeState(LifeState.PAUSE)
     }
 
     override fun onStop() {
         super.onStop()
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onStop()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.STOP)
+        lifeProvider.makeLifeState(LifeState.STOP)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-//        lifeCycleListener.forEach {
+//        lifecycleListener.forEach {
 //            it.onDestroy()
 //        }
-        lifeCycleProvider.makeLifeState(LifeState.DESTROY)
+        lifeProvider.makeLifeState(LifeState.DESTROY)
+    }
+
+    override fun getLifecycleProvider(): LifecycleProvider {
+        return lifeProvider
     }
 }

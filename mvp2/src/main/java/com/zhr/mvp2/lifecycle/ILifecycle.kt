@@ -1,6 +1,6 @@
 package com.zhr.mvp2.lifecycle
 
-interface ILifeCycle {
+interface ILifecycle {
     fun onCreate()
     fun onStart()
     fun onResume()

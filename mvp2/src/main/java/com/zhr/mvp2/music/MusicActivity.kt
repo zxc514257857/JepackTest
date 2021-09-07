@@ -27,14 +27,16 @@ class MusicActivity : BaseActivity() {
 //    private val handler = Handler()
 
     private val musicPresenter by lazy {
-        MusicPresenter()
+        MusicPresenter(this)
     }
 
-    init {
-        // 把此实现了生命周期接口的方法 加入监听
-//        addLifeListener(musicPresenter)
-        lifeCycleProvider.addLifeListener(musicPresenter)
-    }
+    // 不在这里添加生命周期监听，而是放在Presenter中进行
+//    init {
+//        // 把此实现了生命周期接口的方法 加入监听
+////        addLifeListener(musicPresenter)
+////        lifecycleProvider.addLifeListener(musicPresenter)
+//        lifeProvider.addLifeListener(musicPresenter.ViewLifeImpl())  // 如果是Presenter的内部类 实现ILifecycle也是可以的
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,10 +5,10 @@ import com.zhr.mvp2.base.BaseFragment
 class MusicListFragment : BaseFragment() {
 
     private val musicPresenter by lazy {
-        MusicPresenter()
+        MusicPresenter(this)
     }
 
-    init {
-        lifeCycleProvider.addLifeListener(musicPresenter)
-    }
+//    init {
+//        lifecycleProvider.addLifeListener(musicPresenter)
+//    }
 }

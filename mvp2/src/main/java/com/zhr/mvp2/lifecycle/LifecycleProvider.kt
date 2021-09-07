@@ -1,57 +1,57 @@
 package com.zhr.mvp2.lifecycle
 
 /**
- * 管理注册进来的接口 ILifeCycle  保存当前View的生命周期状态
+ * 管理注册进来的接口 ILifecycle  保存当前View的生命周期状态
  */
-class LifeCycleProvider {
+class LifecycleProvider {
 
-    private val lifeCycleListener = mutableListOf<ILifeCycle>()
+    private val lifecycleListener = mutableListOf<ILifecycle>()
     private var currentLifeState: LifeState? = null
 
-    fun addLifeListener(lifeCycle: ILifeCycle) {
-        if (!lifeCycleListener.contains(lifeCycle)) {
-            lifeCycleListener.add(lifeCycle)
+    fun addLifeListener(lifecycle: ILifecycle) {
+        if (!lifecycleListener.contains(lifecycle)) {
+            lifecycleListener.add(lifecycle)
         }
     }
 
-    private fun removeListener(lifeCycle: ILifeCycle) {
-        lifeCycleListener.remove(lifeCycle)
+    private fun removeListener(lifecycle: ILifecycle) {
+        lifecycleListener.remove(lifecycle)
     }
 
     fun makeLifeState(state: LifeState?) {
         currentLifeState = state
         when (state) {
             LifeState.CREATE -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onCreate()
                 }
             }
             LifeState.START -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onStart()
                 }
             }
             LifeState.RESUME -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onResume()
                 }
             }
             LifeState.PAUSE -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onPause()
                 }
             }
             LifeState.STOP -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onStop()
                 }
             }
             LifeState.DESTROY -> {
-                lifeCycleListener.forEach {
+                lifecycleListener.forEach {
                     it.onDestroy()
                 }
                 // 在onDestroy中清空此Activity中的所有生命周期数据
-                lifeCycleListener.clear()
+                lifecycleListener.clear()
             }
         }
     }

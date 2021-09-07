@@ -2,42 +2,47 @@ package com.zhr.mvp2.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.zhr.mvp2.lifecycle.LifeCycleProvider
+import com.zhr.mvp2.lifecycle.ILifecycleOwner
 import com.zhr.mvp2.lifecycle.LifeState
+import com.zhr.mvp2.lifecycle.LifecycleProvider
 
-open class BaseFragment : Fragment() {
+open class BaseFragment : Fragment(), ILifecycleOwner {
 
-    val lifeCycleProvider by lazy {
-        LifeCycleProvider()
+    val lifeProvider by lazy {
+        LifecycleProvider()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifeCycleProvider.makeLifeState(LifeState.CREATE)
+        lifeProvider.makeLifeState(LifeState.CREATE)
     }
 
     override fun onStart() {
         super.onStart()
-        lifeCycleProvider.makeLifeState(LifeState.START)
+        lifeProvider.makeLifeState(LifeState.START)
     }
 
     override fun onResume() {
         super.onResume()
-        lifeCycleProvider.makeLifeState(LifeState.RESUME)
+        lifeProvider.makeLifeState(LifeState.RESUME)
     }
 
     override fun onPause() {
         super.onPause()
-        lifeCycleProvider.makeLifeState(LifeState.PAUSE)
+        lifeProvider.makeLifeState(LifeState.PAUSE)
     }
 
     override fun onStop() {
         super.onStop()
-        lifeCycleProvider.makeLifeState(LifeState.STOP)
+        lifeProvider.makeLifeState(LifeState.STOP)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lifeCycleProvider.makeLifeState(LifeState.DESTROY)
+        lifeProvider.makeLifeState(LifeState.DESTROY)
+    }
+
+    override fun getLifecycleProvider(): LifecycleProvider {
+        return lifeProvider
     }
 }

@@ -4,45 +4,45 @@ import com.zhr.mvp2.base.BaseFragment
 
 class MusicDetailFragment : BaseFragment() {
 
-//    private val lifeCycleProvider by lazy {
-//        LifeCycleProvider()
+//    private val lifecycleProvider by lazy {
+//        LifecycleProvider()
 //    }
 
     private val musicPresenter by lazy {
-        MusicPresenter()
+        MusicPresenter(this)
     }
 
-    init {
-        lifeCycleProvider.addLifeListener(musicPresenter)
-    }
+//    init {
+//        lifecycleProvider.addLifeListener(musicPresenter)
+//    }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
-//        lifeCycleProvider.makeLifeState(LifeState.CREATE)
+//        lifecycleProvider.makeLifeState(LifeState.CREATE)
 //    }
 //
 //    override fun onStart() {
 //        super.onStart()
-//        lifeCycleProvider.makeLifeState(LifeState.START)
+//        lifecycleProvider.makeLifeState(LifeState.START)
 //    }
 //
 //    override fun onResume() {
 //        super.onResume()
-//        lifeCycleProvider.makeLifeState(LifeState.RESUME)
+//        lifecycleProvider.makeLifeState(LifeState.RESUME)
 //    }
 //
 //    override fun onPause() {
 //        super.onPause()
-//        lifeCycleProvider.makeLifeState(LifeState.PAUSE)
+//        lifecycleProvider.makeLifeState(LifeState.PAUSE)
 //    }
 //
 //    override fun onStop() {
 //        super.onStop()
-//        lifeCycleProvider.makeLifeState(LifeState.STOP)
+//        lifecycleProvider.makeLifeState(LifeState.STOP)
 //    }
 //
 //    override fun onDestroy() {
 //        super.onDestroy()
-//        lifeCycleProvider.makeLifeState(LifeState.DESTROY)
+//        lifecycleProvider.makeLifeState(LifeState.DESTROY)
 //    }
 }

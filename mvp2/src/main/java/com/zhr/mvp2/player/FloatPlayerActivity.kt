@@ -21,7 +21,7 @@ class FloatPlayerActivity : BaseActivity() {
     }
 
     init {
-        lifeCycleProvider.addLifeListener(playerPresenter)
+        lifeProvider.addLifeListener(playerPresenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
