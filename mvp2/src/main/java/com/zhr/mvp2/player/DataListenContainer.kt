@@ -3,7 +3,7 @@ package com.zhr.mvp2.player
 import android.os.Looper
 import com.zhr.mvp2.music.App
 
-class DataListenController<T> {
+class DataListenContainer<T> {
 
     private val blocks = arrayListOf<(T?) -> Unit>()
     var value: T? = null

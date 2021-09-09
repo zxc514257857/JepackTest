@@ -6,8 +6,8 @@ import com.zhr.mvp2.lifecycle.ILifecycle
 class PlayerPresenter private constructor() : ILifecycle {
 
     // 对这两个数据让 DataListenController进行了一个包裹， 对这两个数据进行监听
-    var currentPlayState = DataListenController<PlayState>()
-    var currentSong = DataListenController<SongsBean>()
+    var currentPlayState = DataListenContainer<PlayState>()
+    var currentSong = DataListenContainer<SongsBean>()
     private val TAG: String = "PlayerPresenter"
 
     companion object {

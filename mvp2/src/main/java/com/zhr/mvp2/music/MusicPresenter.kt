@@ -3,7 +3,7 @@ package com.zhr.mvp2.music
 import android.util.Log
 import com.zhr.mvp2.lifecycle.ILifecycle
 import com.zhr.mvp2.lifecycle.ILifecycleOwner
-import com.zhr.mvp2.player.DataListenController
+import com.zhr.mvp2.player.DataListenContainer
 
 // 不直接实现ILifecycle了，而是通过内部类实现
 //class MusicPresenter : ILifecycle {
@@ -13,7 +13,7 @@ class MusicPresenter(lifecycleOwner: ILifecycleOwner) : ILifecycle {
     private val TAG: String = "MusicPresenter"
 
     // 通过 DataListenController进行监听 音乐数据变化
-    val musicList = DataListenController<List<Music>>()
+    val musicList = DataListenContainer<List<Music>>()
     private val page: Int = 1
     private val size: Int = 30
 

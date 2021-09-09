@@ -1,12 +1,14 @@
 package com.zhr.mvptest
 
 import android.text.TextUtils
+import android.util.Log
 
 /**
  * 在v层注册回调，p层回调给v层；同时在p层注册回调，p层回调给m层
  */
 class LoginPresenter : LoginModel.CheckUsernameCallback {
 
+    private val TAG: String = "LoginPresenter"
     private var loginCallback: LoginCallback? = null
     private var username: String? = null
     private var password: String? = null
@@ -52,18 +54,23 @@ class LoginPresenter : LoginModel.CheckUsernameCallback {
 
     override fun usernameCanUse() {
         loginCallback?.usernameCanUse()
-        loginModel.checkUsernamePassword(username!!, password!!, object: LoginModel.CheckUsernamePasswordCallback{
-            override fun loading() {
-                loginCallback?.loading()
-            }
+        loginModel.checkUsernamePassword(username!!,
+            password!!,
+            object : LoginModel.CheckUsernamePasswordCallback {
+                override fun loading() {
+                    loginCallback?.loading()
+                    Log.i(TAG, "loading: ")
+                }
 
-            override fun loginSuccess() {
-                loginCallback?.loginSuccess()
-            }
+                override fun loginSuccess() {
+                    loginCallback?.loginSuccess()
+                    Log.i(TAG, "loginSuccess: ")
+                }
 
-            override fun loginFail() {
-                loginCallback?.loginFail()
-            }
-        })
+                override fun loginFail() {
+                    loginCallback?.loginFail()
+                    Log.i(TAG, "loginFail: ")
+                }
+            })
     }
 }
