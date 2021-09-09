@@ -8,7 +8,9 @@ class MusicPresenter private constructor() {
     private val TAG: String = "MusicPresenter"
 //    private var musicCallback: MusicCallback? = null
     val liveMusicList = MutableLiveData<List<Music>>()
-    val liveLoadState = MutableLiveData<LoadState>()
+    // 这样也有两种写法 一种是使用MutableLiveData 一种是自己去实现LiveData 然后重写postValue方法
+//    val liveLoadState = MutableLiveData<LoadState>()
+    val liveLoadState = LiveLoadState.instance
 
     enum class LoadState {
         LOADING, LOAD_SUCCESS, LOAD_FAIL
