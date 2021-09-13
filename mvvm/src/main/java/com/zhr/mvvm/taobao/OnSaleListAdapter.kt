@@ -11,11 +11,10 @@ import kotlinx.android.synthetic.main.item_onsale.view.*
 
 class OnSaleListAdapter : RecyclerView.Adapter<OnSaleListAdapter.InnerHolder>() {
 
-    private val contentList = arrayListOf<MapData>()
+    private val contentList = mutableListOf<MapData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_onsale, parent, false)
-        return InnerHolder(itemView)
+        return InnerHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_onsale, parent, false))
     }
 
     override fun onBindViewHolder(holder: InnerHolder, position: Int) {
@@ -32,7 +31,7 @@ class OnSaleListAdapter : RecyclerView.Adapter<OnSaleListAdapter.InnerHolder>() 
         return contentList.size
     }
 
-    fun setData(contentList: List<MapData>) {
+    fun setData(contentList: MutableList<MapData>) {
         this.contentList.clear()
         this.contentList.addAll(contentList)
         notifyDataSetChanged()

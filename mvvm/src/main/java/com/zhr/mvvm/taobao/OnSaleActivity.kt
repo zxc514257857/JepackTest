@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ConvertUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.zhr.mvvm.R
 import kotlinx.android.synthetic.main.activity_on_error.*
 import kotlinx.android.synthetic.main.activity_on_sale.*
@@ -47,7 +50,8 @@ class OnSaleActivity : AppCompatActivity() {
         // let 里面的值要用it表示，可以表示在第一个的 也可以表示其他位置的
         rvContentList.run {
             adapter = onSaleListAdapter
-            layoutManager = LinearLayoutManager(this@OnSaleActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(this@OnSaleActivity, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
                     outRect: Rect,
@@ -66,8 +70,29 @@ class OnSaleActivity : AppCompatActivity() {
                 }
             })
         }
+        // 无网时，重新加载数据
         viewReload.setOnClickListener {
             viewModel.loadContent()
+        }
+        refreshView.run {
+            // 开启上滑加载更多
+            setEnableLoadmore(true)
+            // 开启下拉刷新
+            setEnableRefresh(true)
+            // 拉动超出有回弹效果
+            setEnableOverScroll(true)
+            setOnRefreshListener(object : RefreshListenerAdapter() {
+                override fun onLoadMore(refreshLayout: TwinklingRefreshLayout?) {
+                    // 执行上滑加载更多
+                    viewModel.loadMore()
+                }
+
+                override fun onRefresh(refreshLayout: TwinklingRefreshLayout?) {
+                    super.onRefresh(refreshLayout)
+                    // 执行下拉刷新
+                    viewModel.refresh()
+                }
+            })
         }
     }
 
@@ -97,11 +122,32 @@ class OnSaleActivity : AppCompatActivity() {
                         Log.i(TAG, "LoadState.ERROR")
                     }
                     LoadState.SUCCESS -> {
-                        rvContentList.visibility = View.VISIBLE
+                        refreshView.visibility = View.VISIBLE
                         Log.i(TAG, "LoadState.SUCCESS")
                     }
                 }
                 preLoadState = it
+            })
+            loadMoreState.observe(this@OnSaleActivity, {
+                when (it) {
+                    LoadMoreState.LOADMORE_SUCCESS -> {
+                        refreshView.finishLoadmore()
+                        Log.i(TAG, "LoadState.LOADMORE_SUCCESS")
+                    }
+                    LoadMoreState.LOADMORE_ERROR -> {
+                        ToastUtils.showShort("网络异常，请稍候重试！")
+                        refreshView.finishLoadmore()
+                        Log.i(TAG, "LoadState.LOADMORE_ERROR")
+                    }
+                    LoadMoreState.LOADMORE_EMPTY -> {
+                        ToastUtils.showShort("已经加载全部内容！")
+                        refreshView.finishLoadmore()
+                        Log.i(TAG, "LoadState.LOADMORE_EMPTY")
+                    }
+                    LoadMoreState.LOADMORE_LOADING -> {
+                        Log.i(TAG, "LoadState.LOADMORE_LOADING")
+                    }
+                }
             })
         }.loadContent()
     }
@@ -111,12 +157,12 @@ class OnSaleActivity : AppCompatActivity() {
             LoadState.LOADING -> includeLoading.visibility = View.GONE
             LoadState.EMPTY -> includeEmpty.visibility = View.GONE
             LoadState.ERROR -> includeError.visibility = View.GONE
-            LoadState.SUCCESS -> rvContentList.visibility = View.GONE
+            LoadState.SUCCESS -> refreshView.visibility = View.GONE
         }
     }
 
     private fun hideAll() {
-        rvContentList.visibility = View.GONE
+        refreshView.visibility = View.GONE
         includeEmpty.visibility = View.GONE
         includeError.visibility = View.GONE
         includeLoading.visibility = View.GONE

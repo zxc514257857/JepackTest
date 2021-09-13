@@ -18,7 +18,7 @@ data class TbkDgOptimusMaterialResponse(
 
 data class ResultList(
     @SerializedName("map_data")
-    val mapData: List<MapData>,
+    val mapData: MutableList<MapData>,
 )
 
 data class MapData(
