@@ -104,7 +104,7 @@ class OnSaleActivity : AppCompatActivity() {
             })
             loadState.observe(this@OnSaleActivity, {
                 Log.i(TAG, "loadState: $it")
-                // 除暴方式
+                // 粗暴方式
 //                hideAll()
                 // 优雅方式
                 hideOne()
@@ -132,20 +132,41 @@ class OnSaleActivity : AppCompatActivity() {
                 when (it) {
                     LoadMoreState.LOADMORE_SUCCESS -> {
                         refreshView.finishLoadmore()
-                        Log.i(TAG, "LoadState.LOADMORE_SUCCESS")
+                        Log.i(TAG, "LoadMoreState.LOADMORE_SUCCESS")
                     }
                     LoadMoreState.LOADMORE_ERROR -> {
                         ToastUtils.showShort("网络异常，请稍候重试！")
                         refreshView.finishLoadmore()
-                        Log.i(TAG, "LoadState.LOADMORE_ERROR")
+                        Log.i(TAG, "LoadMoreState.LOADMORE_ERROR")
                     }
                     LoadMoreState.LOADMORE_EMPTY -> {
                         ToastUtils.showShort("已经加载全部内容！")
                         refreshView.finishLoadmore()
-                        Log.i(TAG, "LoadState.LOADMORE_EMPTY")
+                        Log.i(TAG, "LoadMoreState.LOADMORE_EMPTY")
                     }
                     LoadMoreState.LOADMORE_LOADING -> {
-                        Log.i(TAG, "LoadState.LOADMORE_LOADING")
+                        Log.i(TAG, "LoadMoreState.LOADMORE_LOADING")
+                    }
+                }
+            })
+            refreshState.observe(this@OnSaleActivity, {
+                when (it) {
+                    RefreshState.REFRESH_SUCCESS -> {
+                        refreshView.finishRefreshing()
+                        Log.i(TAG, "RefreshState.REFRESH_SUCCESS")
+                    }
+                    RefreshState.REFRESH_ERROR -> {
+                        ToastUtils.showShort("网络异常，请稍候重试！")
+                        refreshView.finishRefreshing()
+                        Log.i(TAG, "RefreshState.REFRESH_ERROR")
+                    }
+                    RefreshState.REFRESH_EMPTY -> {
+                        ToastUtils.showShort("已经加载全部内容！")
+                        refreshView.finishRefreshing()
+                        Log.i(TAG, "RefreshState.REFRESH_EMPTY")
+                    }
+                    RefreshState.REFRESH_LOADING -> {
+                        Log.i(TAG, "RefreshState.REFRESH_LOADING")
                     }
                 }
             })
