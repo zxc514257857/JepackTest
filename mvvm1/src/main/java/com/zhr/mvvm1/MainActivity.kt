@@ -24,16 +24,22 @@ import android.os.Bundle
  * 搭建本地构建仓库，并代理到阿里云。可以使用本地仓库，也可以代理远程仓库
  * 不仅可以android，还可以ios，php，python，go等语言提供帮助
  * 使用JFrog Artifactory
+ * 替换了几个地方的仓库配置： Project的build.gradle中的仓库配置以及 gradlewrapper的地址配置
+ * 我创建了一个本地仓库，有创建了几个代理的远程仓库，然后把这几个仓库放到建立的虚拟仓库里面，把这个虚拟仓库引用进项目即可。可以加快构建速度，在几秒内构建完
+ * maven{
+ *      url 'http://localhost:8081/artifactory/android-group'  // 自己建立的虚拟仓库
+ * }
  *
  * Windows系统下的包管理工具：https://chocolatey.org/install
  * WindowsPowerShell 和cmd的区别：WindowsPowerShell 是高级版的命令行工具
- * WindowsPowelShell安装 chocolatey： Get-ExecutionPolicy -> Set-ExecutionPolicy AllSigned  FQ了但一直安装不上
- * Scoop 也安装不了  回去用自己的笔记本电脑试一下  todo
+ * WindowsPowelShell安装 chocolatey： Get-ExecutionPolicy -> Set-ExecutionPolicy AllSigned  FQ了但一直安装不上（在家里的Win10系统上安装成功）
+ * https://community.chocolatey.org/packages   这是Chocolatey的安装包仓库
+ * Scoop 也安装不了  回去用自己的笔记本电脑试一下
  * $psversiontable.psversion.major 查看PowerShell 版本号
  *
  * git下拉代码在指定位置  git clone xxx.git e:/demo/   如果不指定位置则在命令行程序所在的路径
  *
- *
+ * Retrofit 的默认Client不打印日志 所以我们自己配置Okhttp的日志拦截器
  *
  *
  *
