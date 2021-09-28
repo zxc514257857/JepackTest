@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_config"
+    app:startDestination="@id/fg_login">
+
+    <fragment
+        android:id="@+id/fg_login"
+        android:name="com.example.navigation.fragment.LoginFragment">
+
+        <!-- A页面到B页面，xxAnim表示的是B页面的进和A页面的出  <-  -->
+        <!-- popxxAnim表示的是点击返回键表示的是A页面的进和B页面的出  ->  -->
+        <!-- fragment的动画切换配置-->
+        <action
+            android:id="@+id/to_fg_forget"
+            app:destination="@+id/fg_forget"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
+        <action
+            android:id="@+id/to_fg_register"
+            app:destination="@+id/fg_register" />
+        <action
+            android:id="@+id/to_av_agreement"
+            app:destination="@+id/av_agreement" />
+        <!--共享元素设置-->
+        <action
+            android:id="@+id/to_fg_setting"
+            app:destination="@+id/fg_setting" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fg_forget"
+        android:name="com.example.navigation.fragment.ForgetFragment" />
+
+    <fragment
+        android:id="@+id/fg_register"
+        android:name="com.example.navigation.fragment.RegisterFragment">
+        <action
+            android:id="@+id/to_fg_avatar"
+            app:destination="@+id/fg_avatar" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fg_avatar"
+        android:name="com.example.navigation.fragment.AvatarFragment">
+
+        <!-- 表示我直接回到了Login栈，其他的栈不用管，中间的栈直接弹栈-->
+        <!-- popUpTo 和 popUpToInclusive起到的中间弹栈的效果-->
+        <action
+            android:id="@+id/to_fg_login"
+            app:destination="@id/fg_login"
+            app:popUpTo="@id/fg_login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/a_fg"
+        android:name="com.example.navigation.fragment.AFragment">
+        <action
+            android:id="@+id/to_fg_forget"
+            app:destination="@+id/fg_forget"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
+        <action
+            android:id="@+id/to_fg_register"
+            app:destination="@+id/fg_register" />
+        <action
+            android:id="@+id/to_av_agreement"
+            app:destination="@+id/av_agreement" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fg_setting"
+        android:name="com.example.navigation.fragment.SettingFragment" />
+
+    <!-- 可以fragment配置action跳到activity -->
+    <activity
+        android:id="@+id/av_agreement"
+        android:name="com.example.navigation.activity.AgreementActivity" />
+
+</navigation>

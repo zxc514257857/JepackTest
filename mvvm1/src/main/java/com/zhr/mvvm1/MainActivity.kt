@@ -41,9 +41,6 @@ import android.os.Bundle
  *
  * Retrofit 的默认Client不打印日志 所以我们自己配置Okhttp的日志拦截器
  *
- *
- *
- *
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

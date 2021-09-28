@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
- * https://www.bilibili.com/video/BV1Dk4y1C7mm?p=1
+ * https://www.bilibili.com/video/BV1Dk4y1C7mm
  * mvc架构：实现功能: 登录及登陆状态提示
  *
  * kotlin几个语法糖：
