@@ -22,8 +22,8 @@ class TaobaoActivity : BaseActivity<ActivityTaobaoBinding>() {
         // 注意：两个菜单设置对应的navigation -> fragment的id 和 menu -> item的id要是一致的，否则底边栏无法点击切换
 //        // 方法一：布局为FragmentContainerView
 //        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv) as NavHostFragment
-//        viewBinding?.bnv?.setupWithNavController(navHostFragment.navController)
+//        binding?.bnv?.setupWithNavController(navHostFragment.navController)
         // 方法二：布局为Fragment
-        viewBinding?.bnv?.setupWithNavController(findNavController(R.id.fcv))
+        binding?.bnv?.setupWithNavController(findNavController(R.id.fcv))
     }
 }

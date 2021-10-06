@@ -66,7 +66,6 @@ class OnSaleViewModel() : ViewModel() {
      * 下拉刷新
      */
     fun refresh() {
-
         Log.i(TAG, "refresh: ")
         // 加载方式为下拉刷新
         loadType = 2

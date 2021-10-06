@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.example.databinding.domain.LoadState" />
+
+        <variable
+            name="loadState"
+            type="com.example.databinding.domain.LoadState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/refreshView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E9E9E9"
+            android:visibility="@{(loadState == LoadState.SUCCESS)? View.VISIBLE: View.GONE}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+        <include
+            android:id="@+id/includeOnLoading"
+            layout="@layout/include_on_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(loadState == LoadState.LOADING)? View.VISIBLE: View.GONE}" />
+
+        <include
+            android:id="@+id/includeOnEmpty"
+            layout="@layout/include_on_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(loadState == LoadState.EMPTY)? View.VISIBLE: View.GONE}" />
+
+        <!--  error页面转换成databinding布局运行就会报错：错误: 不兼容的类型: IncludeOnErrorBinding无法转换为View-->
+        <!--  目前还不知道怎么解决-->
+        <include
+            android:id="@+id/includeOnError"
+            layout="@layout/include_on_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(loadState == LoadState.ERROR)? View.VISIBLE: View.GONE}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

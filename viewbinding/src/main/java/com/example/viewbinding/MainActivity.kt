@@ -21,16 +21,16 @@ class MainActivity : AppCompatActivity() {
      * 使用lateinit 表示使用时再初始化，类似于by lazy
      * lateinit 修饰的var ，by lazy 修饰的val
      */
-    private lateinit var viewBinding: ActivityTestBinding
+    private lateinit var binding: ActivityTestBinding
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 这里的名字是和xml里的名字是对应的，不是和类名对应的
-        viewBinding = ActivityTestBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        viewBinding.apply {
+//        binding.apply {
 //            setContentView(this.root)
 //            this.tvTest.setOnClickListener {
 //                // 0 - 9

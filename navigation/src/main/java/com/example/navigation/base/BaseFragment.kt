@@ -1,7 +1,6 @@
 package com.example.navigation.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ abstract class BaseFragment<T : ViewBinding?> : Fragment() {
         private const val TAG = "BaseFragment"
     }
 
-    protected var viewBinding: T? = null
+    protected var binding: T? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +30,12 @@ abstract class BaseFragment<T : ViewBinding?> : Fragment() {
                 LayoutInflater::class.java,
                 ViewGroup::class.java,
                 Boolean::class.javaPrimitiveType)
-            viewBinding = method.invoke(null, layoutInflater, container, false) as T
+            binding = method.invoke(null, layoutInflater, container, false) as T
         } catch (e: Exception) {
             e.printStackTrace()
         }
 //        testData()
-        return viewBinding!!.root
+        return binding!!.root
     }
 
     /**

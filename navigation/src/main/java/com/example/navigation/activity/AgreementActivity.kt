@@ -13,6 +13,6 @@ class AgreementActivity : BaseActivity<ActivityAgreementBinding>() {
         window.setBackgroundDrawableResource(R.color.transparent)
         // fragment中获取bundle是从arguement中获取
         // activity中获取bundle是从intent中获取
-        viewBinding?.tv2?.text = intent.getStringExtra("toAgreement")
+        binding?.tv2?.text = intent.getStringExtra("toAgreement")
     }
 }

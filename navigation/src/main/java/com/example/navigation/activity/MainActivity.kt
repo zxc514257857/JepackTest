@@ -21,7 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewBinding?.fragmentContainerView?.setOnClickListener {
+        binding?.fragmentContainerView?.setOnClickListener {
             Log.i(TAG, "onCreate1: ")
         }
     }

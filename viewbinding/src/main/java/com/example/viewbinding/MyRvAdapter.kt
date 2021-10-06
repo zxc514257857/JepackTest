@@ -12,14 +12,14 @@ class MyRvAdapter(private val list: ArrayList<String>) :
     RecyclerView.Adapter<MyRvAdapter.InnerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerHolder {
-        val viewBinding =
+        val binding =
             RvItemTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return InnerHolder(viewBinding)
+        return InnerHolder(binding)
     }
 
     override fun onBindViewHolder(holder: InnerHolder, position: Int) {
         val innerHolder = holder as InnerHolder
-        innerHolder.viewBinding.tvTest.text = list[position]
+        innerHolder.binding.tvTest.text = list[position]
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +30,6 @@ class MyRvAdapter(private val list: ArrayList<String>) :
      * 使用viewbinding代替itemView
      */
 //    inner class InnerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
-    inner class InnerHolder(var viewBinding: RvItemTestBinding) :
-        RecyclerView.ViewHolder(viewBinding.root)
+    inner class InnerHolder(var binding: RvItemTestBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

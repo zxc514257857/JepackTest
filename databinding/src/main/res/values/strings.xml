@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">databinding</string>
+    <string name="tv_yuanjia_format">原价:%.2f</string>
+</resources>

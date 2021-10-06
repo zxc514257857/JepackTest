@@ -25,7 +25,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         // 测试返回操作
-        viewBinding?.btnToForget?.setOnClickListener {
+        binding?.btnToForget?.setOnClickListener {
             // 这里传入的是actionId，通过action找到要跳转的页面
             // 这个页面有几个要跳转出的，就要配置几个action
             val bundle = Bundle()
@@ -36,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         // 测试动画操作
         // 测试三连跳及弹栈操作 login -> register -> avatar -> login
-        viewBinding?.btnToRegister?.setOnClickListener {
+        binding?.btnToRegister?.setOnClickListener {
             // 通过代码配置fragment跳转动画 (设置不生效，不知道什么原因)
             val navOptions = NavOptions.Builder()
                 .setEnterAnim(R.anim.nav_default_enter_anim)
@@ -55,9 +55,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         // 1.对需要共享的view分别设置transitionName
         // 2.navigate()方法里面传入extras参数
         // 3.在另一边Activity修改背景颜色（不用像Fragment一样设置动画效果）
-        viewBinding?.btnToAgreement?.setOnClickListener {
-            val imagePair = Pair<View, String>(viewBinding?.iv1!!, "ivShared")
-            val textPair = Pair<View, String>(viewBinding?.tv1!!, "tvShared")
+        binding?.btnToAgreement?.setOnClickListener {
+            val imagePair = Pair<View, String>(binding?.iv1!!, "ivShared")
+            val textPair = Pair<View, String>(binding?.tv1!!, "tvShared")
             val options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(),
                     imagePair,
@@ -74,16 +74,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         // 1.对需要共享的view分别设置transitionName
         // 2.navigate()方法里面传入extras参数
         // 3.在另一边Fragment中设置Animation
-        viewBinding?.btnToSetting?.setOnClickListener {
+        binding?.btnToSetting?.setOnClickListener {
             // 传入的参数是：本页面iv和 transitionName（需要共享的view的transitionName 需要是一样的）
-//            val imagePair = Pair<View, String>(viewBinding?.iv1!!, "ivShared")
-//            val textPair = Pair<View, String>(viewBinding?.tv1!!, "tvShared")
+//            val imagePair = Pair<View, String>(binding?.iv1!!, "ivShared")
+//            val textPair = Pair<View, String>(binding?.tv1!!, "tvShared")
 //            // 一个参数的元素共享
 ////            val extras = FragmentNavigatorExtras(imagePair)
 //            // 多个参数的元素共享
 //            val extras = FragmentNavigatorExtras(imagePair, textPair)
-            val extras = FragmentNavigatorExtras(viewBinding?.iv1!! to "ivShared",
-                viewBinding?.tv1!! to "tvShared")
+            val extras = FragmentNavigatorExtras(binding?.iv1!! to "ivShared",
+                binding?.tv1!! to "tvShared")
             val bundle = Bundle()
             // 设置Bundle，在另一个页面的Arguement中获取Bundle(Fragment Bundle传参)
             bundle.putString("toSetting", "33333")

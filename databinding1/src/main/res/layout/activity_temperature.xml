@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.TemperatureActivity">
+
+        <!--        &lt;!&ndash;  支持体温测试&ndash;&gt;-->
+        <!--        <include-->
+        <!--            android:id="@+id/body_temp"-->
+        <!--            layout="@layout/item_body_temperature"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
+
+        <!--        &lt;!&ndash;  支持体温和环境温度测试&ndash;&gt;-->
+        <!--        <include-->
+        <!--            android:id="@+id/body_env_temp"-->
+        <!--            layout="@layout/item_body_env_temperature"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
+
+        <!--        &lt;!&ndash;  不支持温度测试&ndash;&gt;-->
+        <!--        <include-->
+        <!--            android:id="@+id/not_support_temp"-->
+        <!--            layout="@layout/item_not_support_temperature"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
+
+        <ViewStub
+            android:id="@+id/body_temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/item_body_temperature" />
+
+        <!--  支持体温和环境温度测试-->
+        <ViewStub
+            android:id="@+id/body_env_temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/item_body_env_temperature" />
+
+        <!--  不支持温度测试-->
+        <ViewStub
+            android:id="@+id/not_support_temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/item_not_support_temperature" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

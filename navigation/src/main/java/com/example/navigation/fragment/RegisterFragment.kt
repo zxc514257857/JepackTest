@@ -16,9 +16,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding?.btnToAvatar?.setOnClickListener {
+        binding?.btnToAvatar?.setOnClickListener {
             findNavController().navigate(R.id.to_fg_avatar)
         }
-        viewBinding?.tv?.text = arguments?.getString("toRegister")
+        binding?.tv?.text = arguments?.getString("toRegister")
     }
 }

@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType
 
 abstract class BaseActivity<T : ViewBinding?> : AppCompatActivity() {
 
-    protected var viewBinding: T? = null
+    protected var binding: T? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,8 +16,8 @@ abstract class BaseActivity<T : ViewBinding?> : AppCompatActivity() {
         val aClass = (superclass as ParameterizedType).actualTypeArguments[0] as Class<*>
         try {
             val method = aClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
-            viewBinding = method.invoke(null, layoutInflater) as T
-            setContentView(viewBinding!!.root)
+            binding = method.invoke(null, layoutInflater) as T
+            setContentView(binding!!.root)
         } catch (e: Exception) {
             e.printStackTrace()
         }

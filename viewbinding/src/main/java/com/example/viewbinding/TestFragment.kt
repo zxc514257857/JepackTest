@@ -17,7 +17,7 @@ import kotlin.random.Random
  */
 class TestFragment : Fragment() {
 
-    private var viewBinding: FragmentTestBinding? = null
+    private var mBinding: FragmentTestBinding? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -25,18 +25,18 @@ class TestFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-//        val viewBinding = FragmentTestBinding.inflate(layoutInflater)
+//        val binding = FragmentTestBinding.inflate(layoutInflater)
         // 这两种inflate方式都行，建议使用下面的方式
-        val viewBinding = FragmentTestBinding.inflate(inflater, container, false)
-        this.viewBinding = viewBinding
-        viewBinding.tvTest.setOnClickListener {
-            viewBinding.tvTest.text = "你好，viewBinding：${Random.nextInt(10)}"
+        val binding = FragmentTestBinding.inflate(inflater, container, false)
+        this.mBinding = binding
+        binding.tvTest.setOnClickListener {
+            binding.tvTest.text = "你好，binding：${Random.nextInt(10)}"
         }
-        return viewBinding.root
+        return binding.root
     }
 
     override fun onDestroyView() {
-        viewBinding = null
+        mBinding = null
         super.onDestroyView()
     }
 }

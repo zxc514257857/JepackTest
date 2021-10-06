@@ -17,6 +17,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
         sharedElementEnterTransition =
             TransitionInflater.from(requireContext()).inflateTransition(R.transition.shared_img)
-        viewBinding?.tv2?.text = arguments?.getString("toSetting")
+        binding?.tv2?.text = arguments?.getString("toSetting")
     }
 }

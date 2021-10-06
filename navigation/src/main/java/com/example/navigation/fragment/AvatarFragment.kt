@@ -11,7 +11,7 @@ class AvatarFragment : BaseFragment<FragmentAvatarBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding?.btnToLogin?.setOnClickListener {
+        binding?.btnToLogin?.setOnClickListener {
             findNavController().navigate(R.id.to_fg_login)
         }
     }
