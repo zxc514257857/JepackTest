@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.databinding1">
-
-    <uses-feature android:name="android.hardware.type.watch" />
+    package="com.example.databinding2">
 
     <application
         android:allowBackup="true"
@@ -12,12 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JepackTest"
-        tools:ignore="AllowBackup,WearStandaloneAppFlag">
-        <activity android:name=".activity.TemperatureActivity">
+        tools:ignore="AllowBackup">
+        <activity android:name=".activity.Stock1Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.StockActivity">
         </activity>
     </application>
 </manifest>

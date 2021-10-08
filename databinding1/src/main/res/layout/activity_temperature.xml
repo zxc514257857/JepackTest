@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:zhr="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="bodyTempValue"
+            type="Float" />
+
+        <variable
+            name="envTempValue"
+            type="Float" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,14 +44,17 @@
             android:id="@+id/body_temp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout="@layout/item_body_temperature" />
+            android:layout="@layout/item_body_temperature"
+            zhr:bodyTemp="@{bodyTempValue}" />
 
         <!--  支持体温和环境温度测试-->
         <ViewStub
             android:id="@+id/body_env_temp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout="@layout/item_body_env_temperature" />
+            android:layout="@layout/item_body_env_temperature"
+            zhr:bodyTemp="@{bodyTempValue}"
+            zhr:envTemp="@{envTempValue}" />
 
         <!--  不支持温度测试-->
         <ViewStub

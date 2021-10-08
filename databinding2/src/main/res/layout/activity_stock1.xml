@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.databinding2.viewmodel.Stock1ViewModel" />
+
+        <variable
+            name="eventHandler"
+            type="com.example.databinding2.activity.Stock1Activity.EventHandler" />
+
+        <import type="com.example.databinding2.converter.Converter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.StockActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <TextView
+            android:id="@+id/tvCurPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前股价"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl1"
+            app:layout_constraintEnd_toEndOf="@id/gl5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvCurNumTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数量"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl2"
+            app:layout_constraintEnd_toEndOf="@id/gl5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gl1"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvCurTotalPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预估总价"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl3"
+            app:layout_constraintEnd_toEndOf="@id/gl5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gl2"
+            tools:ignore="HardcodedText" />
+
+        <CheckBox
+            android:id="@+id/cbAgree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.agreement}"
+            android:text="同意协议"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl4"
+            app:layout_constraintEnd_toEndOf="@id/gl5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gl3"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etCurPriceCentent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:text='@={Converter.double2String(viewModel.price1)}'
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <EditText
+            android:id="@+id/etCurNumCentent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:text="@={Converter.double2String(viewModel.num1)}"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl5"
+            app:layout_constraintTop_toTopOf="@id/gl1"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <TextView
+            android:id="@+id/tvCurTotalPriceContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text='@{String.format("%.2f", viewModel.total)}'
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl5"
+            app:layout_constraintTop_toTopOf="@id/gl2"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnSell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->eventHandler.onStockBtnClick()}"
+            android:text="卖出"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@id/gl4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl5"
+            app:layout_constraintTop_toTopOf="@id/gl3"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
